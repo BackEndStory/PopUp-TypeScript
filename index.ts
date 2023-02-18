@@ -4,10 +4,17 @@ const app = express();
 import detenv from 'dotenv';
 detenv.config();
 import morgan from 'morgan';
-app.set('port',  3000);
-app.use(express.json());
 
+
+
+app.set('port',  process.env.DEV_PORT || 3030);
+app.use(express.json());
 app.use(morgan('combined'));
+
+app.get('/', (req, res, next) => {
+    res.send('Hi! This is my first express server. My name is Woojin.');
+});
+app.use('/api', require('./routes/popdata'));
 
 
 app.use((req, res, next) => {
@@ -16,6 +23,10 @@ app.use((req, res, next) => {
     next(error);
 });
 
+
+
+
 app.listen(process.env.DEV_PORT , () => {  
-    console.log(app.get('port'), '번 포트에서 대기 중');
+    console.log(app.get('port'), '번 포트에서 대기 중!');
+
 });
