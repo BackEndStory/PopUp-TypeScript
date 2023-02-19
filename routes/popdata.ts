@@ -18,11 +18,13 @@ router.get('/', async (req, res, next) => {
         const result2 = result[0];
         console.log(result[0]);
         if(result !== null || undefined){
-            return res.status(203).json({
+            return res.status(203).json(
+             //   {
                 result2,
-                code: 203,
-                message: "Ok"
-            });
+           //     code: 203,
+            //    message: "Ok"
+          //  }
+            );
         }
         return res.status(404).json({
             code: 404,
