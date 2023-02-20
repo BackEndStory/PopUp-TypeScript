@@ -6,7 +6,9 @@ import  {DATA_SOURCES} from '../config/db';
 import mysql from 'mysql2/promise';
 
 
-
+/**
+ * 팝업스토어 데이터 뿌려주기
+ */
 router.get('/', async (req, res, next) => {    
     const connection = await mysql.createConnection(DATA_SOURCES.development); // DB 커넥션 생성
     await connection.connect();         
@@ -19,11 +21,11 @@ router.get('/', async (req, res, next) => {
         console.log(result[0]);
         if(result !== null || undefined){
             return res.status(203).json(
-             //   {
+               {
                 result2,
-           //     code: 203,
-            //    message: "Ok"
-          //  }
+                code: 203,
+               message: "Ok"
+           }
             );
         }
         return res.status(404).json({
