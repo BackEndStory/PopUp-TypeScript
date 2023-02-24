@@ -11,10 +11,8 @@ app.set('port',  process.env.DEV_PORT || 3030);
 app.use(express.json());
 app.use(morgan('combined'));
 
-app.get('/', (req, res, next) => {
-    res.send('Hi! This is my first express server. My name is Woojin.');
-});
-app.use('/api', require('./routes/popdata'));
+
+app.use('/api', require('./routes/popup-data'));
 
 
 app.use((req, res, next) => {

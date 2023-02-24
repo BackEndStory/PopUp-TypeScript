@@ -6,15 +6,16 @@ import  {DATA_SOURCES} from '../config/db';
 import mysql from 'mysql2/promise';
 
 
+
 /**
  * 팝업스토어 데이터 뿌려주기
  */
 router.get('/', async (req, res, next) => {    
-    const connection = await mysql.createConnection(DATA_SOURCES.development); // DB 커넥션 생성
+    const connection = await mysql.createConnection(DATA_SOURCES.development); 
     await connection.connect();         
     
     try {      
-        const pop_up_store_data : string = `select * from storedata; `
+        const pop_up_store_data : string = `select * from popdata; `
         const result = await connection.query(pop_up_store_data);
         
         const result2 = result[0];
