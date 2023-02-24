@@ -12,7 +12,9 @@ app.use(express.json());
 app.use(morgan('combined'));
 
 
-app.use('/api', require('./routes/popup-data'));
+app.use('/', require('./routes/popup-data'));
+ 
+app.use('/', require('./routes/kakao-login'));
 
 
 app.use((req, res, next) => {
