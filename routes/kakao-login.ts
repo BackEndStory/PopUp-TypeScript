@@ -15,7 +15,6 @@ router.post('/kakao_login', async (req, res, next) => {
 
     try {
         const kakao_access_token = req.headers.authorization;
-        console.log(kakao_access_token);
         // const kakao_access_token2 = kakao_access_token.split('Bearer ')[1];
 
         if (typeof kakao_access_token == 'string') {
@@ -25,14 +24,22 @@ router.post('/kakao_login', async (req, res, next) => {
                 url: 'https://kapi.kakao.com/v2/user/me',
                 headers: {
                     Authorization: `Bearer ${kakao_access_token}`
-                }//헤더에 내용을 보고 보내주겠다.
+                }
             })
             const user_email = user_data.data.kakao_account.email
             const user_id = user_data.data.id
-          
-            const pop_up_store_data : string = `insert into users(email, password) values("${user_email}","${user_id}"); `
-            await connection.query(pop_up_store_data);
-
+            console.log(user_email,user_id);
+            const user_sign = `select * from users where email = '${String(user_email)}'; `
+            const user_sign_result = await connection.query(user_sign);
+            console.log(user_sign_result[0]);
+            if (user_sign_result[0] == null || user_sign_result[0] == undefined || 
+            ( user_sign_result[0]!= null && typeof user_sign_result[0] == "object" && !Object.keys(user_sign_result[0]).length)) {
+                console.log(1);
+                const pop_up_store_data: string = `insert into users(email, password) values("${user_email}","${user_id}"); `
+                await connection.query(pop_up_store_data);
+            
+            }
+            console.log(2);
             return res.status(200).json({
                 "code": 200,
                 "message": "OK"
