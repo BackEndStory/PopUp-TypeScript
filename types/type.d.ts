@@ -3,6 +3,7 @@ declare global {
   interface Error {
     code?: number;
     status?: number;
+    message? : string;
   }
   namespace Express {
     export interface Request {
@@ -21,6 +22,11 @@ declare global {
 
   interface IConfig {
     development: Config;
+  }
+
+  interface Decode{
+    id?: number;
+    role? : number;
   }
 
 
