@@ -5,16 +5,16 @@ const secret = process.env.SECRET;
 const redisClient = redis.createClient(process.env.REDIS_PORT as any);
 redisClient.connect();
 
-export  = {
+export = {
     sign: (user_id: number) => {
         const payload = {
             id: user_id,
-           
+
         };
         if (typeof secret == "string") {
             return jwt.sign(payload, secret, {
                 algorithm: 'HS256',
-                expiresIn: '1m',
+                expiresIn: '5m',
             });
         }
     },
@@ -24,7 +24,7 @@ export  = {
         decoded = jwt.decode(token);
 
         return {
-            message: true,
+
             id: decoded.id
         }
 

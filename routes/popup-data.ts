@@ -13,9 +13,9 @@ import mysql from 'mysql2/promise';
 router.get('/', async (req, res, next) => {    
     const connection = await mysql.createConnection(DATA_SOURCES.development); 
     await connection.connect();         
-    
+
     try {      
-        const pop_up_store_data : string = `select * from popdata; `
+        const pop_up_store_data : string = `select * from storedata; `
         const result = await connection.query(pop_up_store_data);
         
         const result2 = result[0];
