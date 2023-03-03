@@ -3,8 +3,7 @@ services:
   redis-server:
     image: "redis"
   popup-app:
-    build: .
-  #  image: leeseungryeol/pleaze:1.0
+    image: leeseungryeol/popupstore:1.0
     ports:
         - "3000:3000"
     environment:
