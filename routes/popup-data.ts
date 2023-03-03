@@ -1,5 +1,3 @@
-
-
 import express from 'express';
 const router = express. Router();
 import  {DATA_SOURCES} from '../config/db';
@@ -15,9 +13,12 @@ router.get('/', async (req, res, next) => {
     await connection.connect();         
 
     try {      
+        console.log(1);
         const pop_up_store_data : string = `select * from storedata; `
+        console.log(3);
         const result = await connection.query(pop_up_store_data);
-        
+        console.log(result);
+        console.log(2);
         const result2 = result[0];
         console.log(result[0]);
         if(result !== null || undefined){

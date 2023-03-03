@@ -1,4 +1,3 @@
-
 import express from 'express';
 const router = express.Router();
 import { DATA_SOURCES } from '../config/db';
@@ -6,7 +5,11 @@ import mysql from 'mysql2/promise';
 import axios from 'axios';
 import * as redis from 'redis';
 import jwt from '../jwt-token/jwt-make'
-const redisClient = redis.createClient(process.env.REDIS_PORT as any);
+
+const redisClient = redis.createClient({
+    url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}/0`,
+    legacyMode:true
+});
 redisClient.connect();
 /**
  * access-token으로 카카오 정보를 가져오고 회원가입 후 jwt access, refresh token 가져오기 
@@ -80,7 +83,7 @@ router.post('/logout', async (req, res, next) => {
     try {
         if (typeof req.headers.authorization == "string") {
             const token = req.headers.authorization.split('Bearer ')[1];
-            const decode : {id:string} = jwt.decode(token);
+            const decode: { id: string } = jwt.decode(token);
             if (decode === null) {
                 res.status(404).send({
                     code: 404,

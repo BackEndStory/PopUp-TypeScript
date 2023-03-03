@@ -2,7 +2,10 @@
 import jwt from 'jsonwebtoken';
 import * as redis from 'redis';
 const secret = process.env.SECRET;
-const redisClient = redis.createClient(process.env.REDIS_PORT as any);
+const redisClient = redis.createClient({
+    url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}/0`,
+    legacyMode:true
+});
 redisClient.connect();
 
 export = {
