@@ -1,9 +1,5 @@
 version: '3'
 services:
-  redis-server:
-     image: redislabs/redistimeseries
-     ports:
-         - 17648:17648
   popup-app:
     image: leeseungryeol/popupstore:1.0
     ports:
