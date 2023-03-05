@@ -1,9 +1,9 @@
 version: '3'
 services:
   redis-server:
-    image: "redis"
+    image: "redislabs/k8s-controller-internal"
     ports:
-        - 17648:6379
+        - 17648:17648
 
   popup-app:
     image: leeseungryeol/popupstore:1.0
