@@ -42,7 +42,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-    
+          docker stop ubuntu_popup-app_1
+          docker stop  ubuntu_redis-server_1
           docker rm ubuntu_popup-app_1
           docker rm ubuntu_redis-server_1
           docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:1.0
