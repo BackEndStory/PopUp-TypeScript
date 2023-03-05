@@ -3,7 +3,7 @@ services:
   redis-server:
     image: "redis"
     ports:
-        - 17648:17648
+        - 17648:6379
 
   popup-app:
     image: leeseungryeol/popupstore:1.0
