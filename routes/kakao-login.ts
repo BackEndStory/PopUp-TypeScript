@@ -19,7 +19,7 @@ router.post('/login', async (req, res, next) => {
     await connection.connect();
     try {
         const kakao_access_token = req.headers.authorization;
-        // const kakao_access_token2 = kakao_access_token.split('Bearer ')[1];
+
 
         if (typeof kakao_access_token == 'string') {
             const user_data = await axios({
