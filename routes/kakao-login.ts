@@ -8,7 +8,7 @@ import jwt from '../jwt-token/jwt-make'
 
 const redisClient = redis.createClient({
     url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}/0`,
-    legacyMode:true
+    legacyMode: true
 });
 redisClient.connect();
 /**
@@ -43,13 +43,11 @@ router.post('/login', async (req, res, next) => {
             }
             const user_index_id = `select id from users where email = '${String(user_email)}'; `
             const user_sign_id_exe: any = await connection.query(user_index_id);
-            console.log(user_sign_id_exe[0][0].id);
 
 
 
             const accessToken = "Bearer " + jwt.sign(user_sign_id_exe[0][0].id);
             const refreshToken = "Bearer " + jwt.refresh();
-            console.log(user_sign_id_exe[0][0].id);
             redisClient.set(String(user_sign_id_exe[0][0].id), refreshToken);
 
             res.status(200).json({

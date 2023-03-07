@@ -3,16 +3,9 @@ require('dotenv').config();
 const S3StreamLogger = require('s3-streamlogger').S3StreamLogger;
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-//import strftime from 'strftime';
-
-
-
-//const strftimeKOR = strftime.timezone('+0900');
-
 
 
 function s3_stream(level: string) {
-    //const time_data = strftimeKOR('%F %T', new Date()); // set Time in Seoul, South Korea
     const time_data = new Date();
     return new S3StreamLogger({
         bucket: `${process.env.BUCKET_NAME}`,
