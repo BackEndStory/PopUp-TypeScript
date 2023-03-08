@@ -51,7 +51,6 @@ const logger = winston.createLogger({
             stream: s3_stream('error'),
         }),
     ],
-    exitOnError: false,
 });
 
 export class LoggerStream {
