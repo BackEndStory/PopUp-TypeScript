@@ -38,17 +38,20 @@ const logger = winston.createLogger({
         new winstonDaily({
             level: 'info',
             stream: s3_stream('info'),
+            maxFiles: 30,
         }),
 
         new winstonDaily({
             level: 'error',
             stream: s3_stream('error'),
+            maxFiles: 30,
         }),
     ],
     exceptionHandlers: [
         new winstonDaily({
             level: 'error',
             stream: s3_stream('error'),
+            maxFiles: 30,
         }),
     ],
 });
